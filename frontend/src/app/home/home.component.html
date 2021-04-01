@@ -1,0 +1,25 @@
+<body>
+
+    <img *ngIf='conditionShip' class="target" src="../../assets/fog-roxo.png" alt="foguete" (click)="click()">
+
+  <mat-card *ngIf='conditionCard'>
+    <form >
+      
+      <i class="material-icons" appRed>
+        people
+      </i>
+      <mat-form-field>
+        <input matInput type="text" placeholder="Name" color="primary" value="">
+      </mat-form-field>
+
+      <i class="material-icons" appRed>
+        people
+      </i>
+      <mat-form-field>
+        <input matInput type="text" placeholder="Name" color="primary" value="">
+      </mat-form-field>
+
+    </form>
+  </mat-card>
+
+</body>

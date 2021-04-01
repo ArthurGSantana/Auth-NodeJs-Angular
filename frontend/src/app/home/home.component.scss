@@ -1,0 +1,55 @@
+@use '../newStyle.scss' as newStyle;
+
+body {
+  @extend %background-init;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+img {
+  width: 130px;
+  height: 140px;
+  cursor: pointer;
+  -webkit-animation-duration: 10s;
+  animation-duration: 5s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+
+  @-webkit-keyframes bounceOutUp {
+    0% {
+       -webkit-transform: translateY(0);
+    }
+    20% {
+       opacity: 1;
+       -webkit-transform: translateY(20px);
+    }
+    100% {
+       opacity: 1;
+       -webkit-transform: translateY(-2000px);
+    }
+}
+
+ @keyframes bounceOutUp {
+    0% {
+       transform: translateY(0);
+    }
+    20% {
+       opacity: 1;
+       transform: translateY(20px);
+    }
+    100% {
+       opacity: 1;
+       transform: translateY(-2000px);
+    }
+ }
+
+ .bounceOutUp {
+    -webkit-animation-name: bounceOutUp;
+    animation-name: bounceOutUp;
+ }
+
+
+
