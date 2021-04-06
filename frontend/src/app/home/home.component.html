@@ -1,45 +1,50 @@
 <body>
 
-    <img *ngIf='conditionShip' class="target bounce" src="../../assets/fog-roxo.png" alt="foguete" (click)="click()">
+    <img *ngIf='conditionShip' class="target bounce" src="../../assets/fog-preto.png" alt="foguete" (click)="click()" focus>
 
   <mat-card class="card fadeInUpBig" *ngIf='conditionCard'>
     <form >
       <div class="divForm">
         <i class="material-icons iform" >
-          people
+          person
         </i>
         <mat-form-field appearance="outline">
           <mat-label>Name</mat-label>
-          <input matInput type="text" placeholder="Insert your name" color="primary" value="" >
+          <input matInput type="text" placeholder="Insert your name" name='name' color="primary" [(ngModel)]="name">
         </mat-form-field>
       </div>
         <br>
       <div class="divForm">
         <i class="material-icons iform" >
-          people
+          email
         </i>
         <mat-form-field appearance="outline">
           <mat-label>E-mail</mat-label>
-          <input matInput type="text" placeholder="Insert your e-mail" color="primary" value="">
+          <input matInput type="text" placeholder="Insert your e-mail" name='email' color="primary" [(ngModel)]="email">
         </mat-form-field>
       </div>
         <br>
       <div class="divForm ageForm">
         <i class="material-icons iform iAge" >
-          people
+          cake
         </i>
         <mat-form-field class="age" appearance="outline">
           <mat-label>Age</mat-label>
-          <input matInput type="number" placeholder="Insert your age" color="primary" value="">
+          <input matInput type="number" placeholder="Insert your age" name="age" color="primary" [(ngModel)]="age">
         </mat-form-field>
 
         <mat-radio-group class="radio">
-          <mat-radio-button value="1">Option 1</mat-radio-button><br>
-          <mat-radio-button value="2">Option 2</mat-radio-button>
+          <mat-radio-button value="1" color='primary'>Masc</mat-radio-button><br>
+          <mat-radio-button value="2" color='primary'>Femi</mat-radio-button>
         </mat-radio-group>
       </div>
     </form>
+    <div class="btn">
+      <button mat-raised-button (click)="login()">Login</button>
+      <button mat-raised-button>Sign</button>
+    </div>
   </mat-card>
+
 
   <div class="footer">
     <i class="material-icons">whatshot</i>

@@ -38,4 +38,10 @@ $frontend-theme: mat-light-theme((
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;}
 
+.my-snack-bar {
+  background-color: black;
+  color: white;
+  border: 3px solid white;
+}
+
 

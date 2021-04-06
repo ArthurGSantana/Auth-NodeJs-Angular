@@ -9,8 +9,9 @@ body {
 }
 
 img {
-  width: 130px;
-  height: 140px;
+  object-fit: cover;
+  width: 100px;
+  height: 190px;
   cursor: pointer;
   -webkit-animation-duration: 3s;
   animation-duration: 3s;
@@ -53,9 +54,10 @@ img {
  }
 
 .card {
+  border: 4px solid white;
   width: 450px;
   height: 300px;
-  background-color: rgba(116, 3, 116, 0.918);
+  background-color: rgba(0, 0, 0, 0.89);
   -webkit-animation-duration: 1s;
   animation-duration: 1s;
   -webkit-animation-fill-mode: both;
@@ -94,19 +96,30 @@ mat-form-field {
 }
 .age {
   width: 50%;
-  margin-left: -30px;
-}
 
-::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
-  color: rgb(44, 1, 33);
-}
-/* Font color */
-input.mat-input-element {
-  color: rgb(44, 1, 35);
 }
 
 ::ng-deep .mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
-  color: red!important;
+  color: white!important;
+}
+
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+  color: white!important;
+  height: 45px;
+  // opacity: 1!important;
+}
+
+// mat-input carent color
+::ng-deep .mat-input-element {
+  caret-color: white!important;
+}
+
+::ng-deep .mat-form-field-label {
+  color: white!important;
+}
+
+::ng-deep .mat-form-field.mat-focused .mat-form-field-label {
+  color: white!important;
 }
 
 @-webkit-keyframes bounce {
@@ -132,12 +145,16 @@ input.mat-input-element {
   display: flex;
   align-items: center;
   span {
-    color: rgb(85, 2, 85);
+    background: -webkit-linear-gradient(white, black );
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
     font-size: 18px;
     font-weight: bolder;
   }
   i {
-    color: rgb(85, 2, 85);
+    background: -webkit-linear-gradient(white, black );
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
   }
 }
 
@@ -158,27 +175,51 @@ input[type=number]::-webkit-inner-spin-button {
 }
 
 .ageForm {
-  margin-left: -25px;
-  .iAge {
-    margin-right: 20px;
-  }
+  display: flex;
+  justify-content: flex-start;
+  padding-left: 3px;
+
 }
 
 .iform {
   margin-right: 10px;
   font-size: 30px;
+  margin-bottom: 15px;
+  color: white;
 }
 
 .radio {
-  margin-top: -7px;
+  margin-top: -17px;
   margin-left: 30px;
+  color: white;
   mat-radio-button {
     margin-bottom: 10px;
+    color: white;
   }
 }
 
+.btn {
+  margin-top: 40px;
+  display: flex;
+  justify-content: space-evenly;
+  button {
+    width: 100px;
+    color: black;
+  }
+}
+input {
+  font-size: 18px;
+  color: white !important;
+  height: 20px;
 
-/* // mat-icon-stepper selected color change
+}
+
+::-webkit-input-placeholder {
+  color: rgb(146, 143, 143);
+}
+
+
+/*  // mat-icon-stepper selected color change
 ::ng-deep .mat-step-header .mat-step-icon-selected, .mat-step-header .mat-step-icon-state-done, .mat-step-header .mat-step-icon-state-edit {
   background-color: red!important;
 }
@@ -208,20 +249,20 @@ input[type=number]::-webkit-inner-spin-button {
 // mat-input error carent color
 ::ng-deep .mat-form-field-invalid .mat-input-element, .mat-warn .mat-input-element {
   caret-color: red!important;
-}
+} */
 
-// mat-label normal state style
+/* // mat-label normal state style
 ::ng-deep .mat-form-field-label {
-  color: rgba(0,0,0,.6)!important;
+  color: rgba(247, 4, 4, 0.6)!important;
   // color: $mainColor!important;
-}
+} */
 
-// mat-label focused style
+/* // mat-label focused style
 ::ng-deep .mat-form-field.mat-focused .mat-form-field-label {
   color: red!important;
-}
+} */
 
-// mat-label error style
+/* // mat-label error style
 ::ng-deep .mat-form-field.mat-form-field-invalid .mat-form-field-label {
   color: red!important;
-} */
+}  */
