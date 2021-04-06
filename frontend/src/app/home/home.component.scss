@@ -3,6 +3,7 @@
 body {
   @extend %background-init;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
@@ -11,8 +12,8 @@ img {
   width: 130px;
   height: 140px;
   cursor: pointer;
-  -webkit-animation-duration: 10s;
-  animation-duration: 5s;
+  -webkit-animation-duration: 3s;
+  animation-duration: 3s;
   -webkit-animation-fill-mode: both;
   animation-fill-mode: both;
 }
@@ -51,5 +52,176 @@ img {
     animation-name: bounceOutUp;
  }
 
+.card {
+  width: 450px;
+  height: 300px;
+  background-color: rgba(116, 3, 116, 0.918);
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+@-webkit-keyframes fadeInUpBig {
+  0% {
+     opacity: 0;
+     -webkit-transform: translateY(150px);
+  }
+  100% {
+     opacity: 1;
+     -webkit-transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUpBig {
+  0% {
+     opacity: 0;
+     transform: translateY(150px);
+  }
+  100% {
+     opacity: 1;
+     transform: translateY(0);
+  }
+}
+
+.fadeInUpBig {
+  -webkit-animation-name: fadeInUpBig;
+  animation-name: fadeInUpBig;
+}
+
+mat-form-field {
+  width: 90%;
+}
+.age {
+  width: 50%;
+  margin-left: -30px;
+}
+
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+  color: rgb(44, 1, 33);
+}
+/* Font color */
+input.mat-input-element {
+  color: rgb(44, 1, 35);
+}
+
+::ng-deep .mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
+  color: red!important;
+}
+
+@-webkit-keyframes bounce {
+   0%, 20%, 50%, 80%, 100% {-webkit-transform: translateY(0);}
+   40% {-webkit-transform: translateY(-30px);}
+   60% {-webkit-transform: translateY(-15px);}
+}
+
+@keyframes bounce {
+   0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+   40% {transform: translateY(-30px);}
+   60% {transform: translateY(-15px);}
+}
+
+.bounce:hover {
+   -webkit-animation-name: bounce;
+   animation-name: bounce;
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  span {
+    color: rgb(85, 2, 85);
+    font-size: 18px;
+    font-weight: bolder;
+  }
+  i {
+    color: rgb(85, 2, 85);
+  }
+}
+
+.divForm {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 
+input[type=number]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+
+}
+
+.divForm {
+  margin-bottom: -20px;
+}
+
+.ageForm {
+  margin-left: -25px;
+  .iAge {
+    margin-right: 20px;
+  }
+}
+
+.iform {
+  margin-right: 10px;
+  font-size: 30px;
+}
+
+.radio {
+  margin-top: -7px;
+  margin-left: 30px;
+  mat-radio-button {
+    margin-bottom: 10px;
+  }
+}
+
+
+/* // mat-icon-stepper selected color change
+::ng-deep .mat-step-header .mat-step-icon-selected, .mat-step-header .mat-step-icon-state-done, .mat-step-header .mat-step-icon-state-edit {
+  background-color: red!important;
+}
+
+//input outline color
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+  color: red!important;
+  // opacity: 1!important;
+}
+
+//mat-input focused color
+::ng-deep .mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
+  color: red!important;
+}
+
+// mat-input error outline color
+::ng-deep .mat-form-field-appearance-outline.mat-form-field-invalid.mat-form-field-invalid .mat-form-field-outline-thick{
+  color: red!important;
+  opacity: 0.8!important;
+}
+
+// mat-input carent color
+::ng-deep .mat-input-element {
+  caret-color: red!important;
+}
+
+// mat-input error carent color
+::ng-deep .mat-form-field-invalid .mat-input-element, .mat-warn .mat-input-element {
+  caret-color: red!important;
+}
+
+// mat-label normal state style
+::ng-deep .mat-form-field-label {
+  color: rgba(0,0,0,.6)!important;
+  // color: $mainColor!important;
+}
+
+// mat-label focused style
+::ng-deep .mat-form-field.mat-focused .mat-form-field-label {
+  color: red!important;
+}
+
+// mat-label error style
+::ng-deep .mat-form-field.mat-form-field-invalid .mat-form-field-label {
+  color: red!important;
+} */

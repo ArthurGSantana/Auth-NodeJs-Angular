@@ -19,10 +19,12 @@ export class HomeComponent implements OnInit {
 
   click(): void {
     let img = document.querySelector(".target") as HTMLImageElement;
+    let card = document.querySelector('.card')as HTMLElement;
     img.className = 'bounceOutUp';
     setTimeout(() => {
       this.conditionShip = false
       this.conditionCard = true
-    }, 3000);
+
+    }, 2000);
   }
 }

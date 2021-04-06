@@ -1,25 +1,51 @@
 <body>
 
-    <img *ngIf='conditionShip' class="target" src="../../assets/fog-roxo.png" alt="foguete" (click)="click()">
+    <img *ngIf='conditionShip' class="target bounce" src="../../assets/fog-roxo.png" alt="foguete" (click)="click()">
 
-  <mat-card *ngIf='conditionCard'>
+  <mat-card class="card fadeInUpBig" *ngIf='conditionCard'>
     <form >
-      
-      <i class="material-icons" appRed>
-        people
-      </i>
-      <mat-form-field>
-        <input matInput type="text" placeholder="Name" color="primary" value="">
-      </mat-form-field>
+      <div class="divForm">
+        <i class="material-icons iform" >
+          people
+        </i>
+        <mat-form-field appearance="outline">
+          <mat-label>Name</mat-label>
+          <input matInput type="text" placeholder="Insert your name" color="primary" value="" >
+        </mat-form-field>
+      </div>
+        <br>
+      <div class="divForm">
+        <i class="material-icons iform" >
+          people
+        </i>
+        <mat-form-field appearance="outline">
+          <mat-label>E-mail</mat-label>
+          <input matInput type="text" placeholder="Insert your e-mail" color="primary" value="">
+        </mat-form-field>
+      </div>
+        <br>
+      <div class="divForm ageForm">
+        <i class="material-icons iform iAge" >
+          people
+        </i>
+        <mat-form-field class="age" appearance="outline">
+          <mat-label>Age</mat-label>
+          <input matInput type="number" placeholder="Insert your age" color="primary" value="">
+        </mat-form-field>
 
-      <i class="material-icons" appRed>
-        people
-      </i>
-      <mat-form-field>
-        <input matInput type="text" placeholder="Name" color="primary" value="">
-      </mat-form-field>
-
+        <mat-radio-group class="radio">
+          <mat-radio-button value="1">Option 1</mat-radio-button><br>
+          <mat-radio-button value="2">Option 2</mat-radio-button>
+        </mat-radio-group>
+      </div>
     </form>
   </mat-card>
+
+  <div class="footer">
+    <i class="material-icons">whatshot</i>
+    <span>
+      ThurZão
+    </span>
+  </div>
 
 </body>
