@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { ServiceHomeService } from './../services/service-home.service';
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -10,7 +11,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private _snackBar: MatSnackBar, private servHome: ServiceHomeService) {}
+  constructor(private _snackBar: MatSnackBar, private servHome: ServiceHomeService, private router: Router) {}
 
   conditionCard: boolean = false;
   conditionShip: boolean = false;
@@ -34,19 +35,13 @@ export class HomeComponent implements OnInit {
   }
 
   login(): void {
-    if(this.name===''){
-      this.servHome.openSnack('Name');
-      return
-    }
-
-    if(this.email===''){
-      this.servHome.openSnack('E-mail');
-      return
-    }
-
-    if(this.age===null){
-      this.servHome.openSnack('Age');
-      return
+    if(this.servHome.loginValidation(this.name, this.email, this.age)){
+      this.router.navigate(['/menuPage'])
     }
   }
+
+  sign(): void {
+    this.router.navigate(['/sign']);
+  }
+
 }

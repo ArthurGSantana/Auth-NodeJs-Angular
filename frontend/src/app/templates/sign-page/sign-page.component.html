@@ -1,0 +1,84 @@
+<body>
+
+  <mat-card class="card">
+    <span>
+      <i class="material-icons iform">create</i>
+      Create Account
+    </span>
+    <form>
+      <div class="divForm">
+        <i class="material-icons iform" >
+          person
+        </i>
+        <mat-form-field appearance="outline" class="field">
+          <mat-label>Name</mat-label>
+          <input matInput type="text" placeholder="Insert your name" name='name' color="primary">
+        </mat-form-field>
+      </div>
+
+      <div class="divForm">
+        <i class="material-icons iform" >
+          email
+        </i>
+        <mat-form-field appearance="outline" class="field">
+          <mat-label>E-mail</mat-label>
+          <input matInput type="text" placeholder="Insert your name" name='name' color="primary">
+        </mat-form-field>
+      </div>
+
+      <div class="divForm">
+        <i class="material-icons iform" >
+          lock
+        </i>
+        <mat-form-field appearance="outline" class="field">
+          <mat-label>Password</mat-label>
+          <input matInput type="password" placeholder="Insert your password" name='name' color="primary" [type]="hide ? 'password' : 'text'">
+          <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+            <i class="material-icons passIcon">{{hide ? 'visibility_off' : 'visibility'}}</i>
+          </button>
+        </mat-form-field>
+      </div>
+
+      <div class="divForm">
+        <i class="material-icons iform" >
+          cake
+        </i>
+        <mat-form-field color="accent" appearance="outline" class="example-form-field">
+          <mat-label>Birthday</mat-label>
+          <input matInput [matDatepicker]="datepicker" style="color: white; font-size: 15px;">
+          <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
+          <mat-datepicker #datepicker>
+            <mat-datepicker-actions>
+              <button mat-button matDatepickerCancel>Cancel</button>
+              <button mat-raised-button  matDatepickerApply>Apply</button>
+            </mat-datepicker-actions>
+          </mat-datepicker>
+        </mat-form-field>
+
+        <mat-radio-group class="radio">
+          <mat-radio-button class='radioBtn' value="1" color='primary'>Man</mat-radio-button><br>
+          <mat-radio-button class='radioBtn' value="2" color='primary'>Woman</mat-radio-button>
+        </mat-radio-group>
+
+      </div>
+      <div class="divBtn">
+        <div class="btnForm">
+          <button mat-raised-button class="back" routerLink='/'>
+            <i class="material-icons">keyboard_backspace</i>
+            Back</button>
+          <button mat-raised-button class="create">
+            <i class="material-icons">check</i>
+            Create</button>
+        </div>
+      </div>
+
+    </form>
+
+  </mat-card>
+
+
+
+
+
+
+</body>

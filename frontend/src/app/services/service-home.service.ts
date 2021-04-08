@@ -17,4 +17,23 @@ export class ServiceHomeService {
       panelClass: 'my-snack-bar'
     })
   }
+
+  loginValidation(name: string, email: string, age: number ): boolean{
+    if(name===''){
+      this.openSnack('Name');
+      return false;
+    }
+
+    if(email===''){
+      this.openSnack('E-mail');
+      return false;
+    }
+
+    if(age===null){
+      this.openSnack('Age');
+      return false;
+    }
+    return true
+  }
+
 }

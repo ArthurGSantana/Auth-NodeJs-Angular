@@ -13,11 +13,18 @@ import { FormsModule } from '@angular/forms';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatButtonModule} from '@angular/material/button';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { MenuPageComponent } from './templates/menu-page/menu-page.component';
+import { SignPageComponent } from './templates/sign-page/sign-page.component';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatNativeDateModule, MatRippleModule} from '@angular/material/core';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
+    HomeComponent,
+    MenuPageComponent,
+    SignPageComponent
   ],
   imports: [
     BrowserModule,
@@ -29,7 +36,10 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     FormsModule,
     MatRadioModule,
     MatButtonModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatRippleModule
   ],
   providers: [],
   bootstrap: [AppComponent]
