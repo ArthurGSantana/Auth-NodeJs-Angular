@@ -24,20 +24,18 @@
         </mat-form-field>
       </div>
         <br>
-      <div class="divForm ageForm">
-        <i class="material-icons iform iAge" >
-          cake
-        </i>
-        <mat-form-field class="age" appearance="outline">
-          <mat-label>Age</mat-label>
-          <input matInput type="number" placeholder="Insert your age" name="age" color="primary" [(ngModel)]="age">
-        </mat-form-field>
-
-        <mat-radio-group class="radio">
-          <mat-radio-button value="1" color='primary'>Masc</mat-radio-button><br>
-          <mat-radio-button value="2" color='primary'>Femi</mat-radio-button>
-        </mat-radio-group>
-      </div>
+        <div class="divForm">
+          <i class="material-icons iform" >
+            lock
+          </i>
+          <mat-form-field appearance="outline" class="field">
+            <mat-label>Password</mat-label>
+            <input matInput type="password" placeholder="Insert your password" name='name' color="primary" [type]="hide ? 'password' : 'text'">
+            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+              <i class="material-icons passIcon">{{hide ? 'visibility_off' : 'visibility'}}</i>
+            </button>
+          </mat-form-field>
+        </div>
     </form>
     <div class="btn">
       <button mat-raised-button (click)="login()">Login</button>

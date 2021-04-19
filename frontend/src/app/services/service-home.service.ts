@@ -11,7 +11,7 @@ export class ServiceHomeService {
 
   openSnack(type: string): void {
     this._snackBar.open(`${type} incorrect!`, 'X', {
-      duration: 2000,
+      duration: 15000,
       horizontalPosition: 'center',
       verticalPosition: 'top',
       panelClass: 'my-snack-bar'

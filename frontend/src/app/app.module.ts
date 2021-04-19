@@ -17,7 +17,8 @@ import { MenuPageComponent } from './templates/menu-page/menu-page.component';
 import { SignPageComponent } from './templates/sign-page/sign-page.component';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule, MatRippleModule} from '@angular/material/core';
-
+import { FontAwesomeModule} from '@fortawesome/angular-fontawesome';
+import {MAT_DATE_LOCALE} from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -39,9 +40,12 @@ import {MatNativeDateModule, MatRippleModule} from '@angular/material/core';
     MatSnackBarModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatRippleModule
+    MatRippleModule,
+    FontAwesomeModule
   ],
-  providers: [],
+  providers: [
+    {provide: MAT_DATE_LOCALE, useValue: 'pt-BR'}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

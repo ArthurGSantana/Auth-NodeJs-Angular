@@ -24,6 +24,8 @@ export class HomeComponent implements OnInit {
   email: string = '';
   age: number = null!;
 
+  hide: boolean = true;
+
   click(): void {
     let img = document.querySelector('.target') as HTMLImageElement;
     //let card = document.querySelector('.card') as HTMLElement;
