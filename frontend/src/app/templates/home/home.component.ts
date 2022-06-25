@@ -1,5 +1,5 @@
 import { Router } from '@angular/router';
-import { ServiceHomeService } from './../services/service-home.service';
+import { ServiceHomeService } from '../../core/services/service-home.service';
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 //import {trigger, state, style, transition, animate, keyframes} from '@angular/animations'

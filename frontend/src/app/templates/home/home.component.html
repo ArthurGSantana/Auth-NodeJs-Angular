@@ -5,32 +5,26 @@
   <mat-card class="card fadeInUpBig" *ngIf='conditionCard'>
     <form >
       <div class="divForm">
-        <i class="material-icons iform" >
-          person
-        </i>
+        <i class="fa-solid fa-user iform"></i>
         <mat-form-field appearance="outline">
-          <mat-label>Name</mat-label>
-          <input matInput type="text" placeholder="Insert your name" name='name' color="primary" [(ngModel)]="name">
+          <mat-label>Nome</mat-label>
+          <input matInput type="text" placeholder="Insira se nome..." name='name' color="primary" [(ngModel)]="name">
         </mat-form-field>
       </div>
         <br>
       <div class="divForm">
-        <i class="material-icons iform" >
-          email
-        </i>
+        <i class="fa-solid fa-envelope iform"></i>
         <mat-form-field appearance="outline">
           <mat-label>E-mail</mat-label>
-          <input matInput type="text" placeholder="Insert your e-mail" name='email' color="primary" [(ngModel)]="email">
+          <input matInput type="text" placeholder="Insira seu e-mail..." name='email' color="primary" [(ngModel)]="email">
         </mat-form-field>
       </div>
         <br>
         <div class="divForm">
-          <i class="material-icons iform" >
-            lock
-          </i>
+          <i class="fa-solid fa-lock iform"></i>
           <mat-form-field appearance="outline" class="field">
-            <mat-label>Password</mat-label>
-            <input matInput type="password" placeholder="Insert your password" name='name' color="primary" [type]="hide ? 'password' : 'text'">
+            <mat-label>Senha</mat-label>
+            <input matInput type="password" placeholder="Insira sua senha..." name='name' color="primary" [type]="hide ? 'password' : 'text'">
             <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
               <i class="material-icons passIcon">{{hide ? 'visibility_off' : 'visibility'}}</i>
             </button>
@@ -38,8 +32,8 @@
         </div>
     </form>
     <div class="btn">
-      <button mat-raised-button (click)="login()">Login</button>
-      <button mat-raised-button (click)="sign()">Sign</button>
+      <button mat-raised-button (click)="login()">Entrar</button>
+      <button mat-raised-button (click)="sign()">Cadastre-se</button>
     </div>
   </mat-card>
 

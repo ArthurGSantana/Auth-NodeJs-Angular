@@ -3,70 +3,92 @@
   <mat-card class="card">
     <span>
       <i class="material-icons iform">create</i>
-      Create Account
+      Cadastrar Conta
     </span>
-    <form>
+    <form [formGroup]="signForm" (ngSubmit)="submitForm()">
       <div class="divForm">
-        <i class="material-icons iform" >
-          person
-        </i>
+        <i class="fa-solid fa-user iform"></i>
         <mat-form-field appearance="outline" class="field">
-          <mat-label>Name</mat-label>
-          <input matInput type="text" placeholder="Insert your name" name='name' color="primary">
+          <mat-label>Nome</mat-label>
+          <input matInput 
+            type="text" placeholder="Insira seu nome..." 
+            name='name' color="primary"
+            formControlName="name">
         </mat-form-field>
       </div>
 
       <div class="divForm">
-        <i class="material-icons iform" >
-          email
-        </i>
+        <i class="fa-solid fa-envelope iform"></i>
         <mat-form-field appearance="outline" class="field">
           <mat-label>E-mail</mat-label>
-          <input matInput type="text" placeholder="Insert your name" name='name' color="primary">
+          <input matInput 
+            type="text" placeholder="Insira um e-mail válido..." 
+            name='name' color="primary"
+            formControlName="email">
         </mat-form-field>
       </div>
 
       <div class="divForm">
-        <i class="material-icons iform" >
-          lock
-        </i>
+        <i class="fa-solid fa-lock iform"></i>
         <mat-form-field appearance="outline" class="field">
-          <mat-label>Password</mat-label>
-          <input matInput type="password" placeholder="Insert your password" name='name' color="primary" [type]="hide ? 'password' : 'text'">
-          <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-            <i class="material-icons passIcon">{{hide ? 'visibility_off' : 'visibility'}}</i>
+          <mat-label>Senha</mat-label>
+          <input matInput 
+            type="password" placeholder="Insira uma senha..." 
+            name='name' color="primary" 
+            formControlName="password"
+            [type]="hidePass ? 'password' : 'text'">
+          <button type="button" mat-icon-button matSuffix (click)="hidePass = !hidePass" >
+            <i class="material-icons passIcon">{{hidePass ? 'visibility_off' : 'visibility'}}</i>
           </button>
         </mat-form-field>
       </div>
 
       <div class="divForm">
-        <i class="fas fa-rocket"></i>
-        <mat-form-field color="accent" appearance="outline" class="example-form-field">
-          <mat-label>Birth Date</mat-label>
-          <input matInput [matDatepicker]="datepicker" style="color: white; font-size: 15px;">
+        <i class="fa-solid fa-lock iform"></i>
+        <mat-form-field appearance="outline" class="field">
+          <mat-label>Confirmação de Senha</mat-label>
+          <input matInput 
+            type="password" placeholder="Insira uma senha..." 
+            name='name' color="primary" 
+            formControlName="passwordConfirm"
+            [type]="hidePassConfirm ? 'password' : 'text'">
+          <button type="button" mat-icon-button matSuffix (click)="hidePassConfirm = !hidePassConfirm" >
+            <i class="material-icons passIcon">{{hidePassConfirm ? 'visibility_off' : 'visibility'}}</i>
+          </button>
+        </mat-form-field>
+      </div>
+
+      <div class="divForm">
+        <i class="fa-solid fa-calendar iform"></i>
+        <mat-form-field color="accent" appearance="outline" class="field">
+          <mat-label>Data Nascimento</mat-label>
+          <input matInput 
+            formControlName="birthDate"
+            [matDatepicker]="datepicker" 
+            style="color: white; font-size: 15px;">
           <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
           <mat-datepicker #datepicker>
             <mat-datepicker-actions>
-              <button mat-button matDatepickerCancel>Cancel</button>
-              <button mat-raised-button  matDatepickerApply>Apply</button>
+              <button mat-button matDatepickerCancel>Cancelar</button>
+              <button mat-raised-button  matDatepickerApply>Aplicar</button>
             </mat-datepicker-actions>
           </mat-datepicker>
         </mat-form-field>
 
-        <mat-radio-group class="radio">
-          <mat-radio-button class='radioBtn' value="1" color='primary'>Man</mat-radio-button><br>
-          <mat-radio-button class='radioBtn' value="2" color='primary'>Woman</mat-radio-button>
-        </mat-radio-group>
-
       </div>
       <div class="divBtn">
         <div class="btnForm">
-          <button mat-raised-button class="back" routerLink='/'>
-            <i class="material-icons">keyboard_backspace</i>
-            Back</button>
-          <button mat-raised-button class="create">
+        
+          <button type="submit" mat-raised-button class="create">
             <i class="material-icons">check</i>
-            Create</button>
+            Cadastrar
+          </button>
+
+          <button type="button" mat-raised-button class="back" [routerLink]="['/']">
+            <i class="material-icons">keyboard_backspace</i>
+            Voltar
+          </button>
+
         </div>
       </div>
 

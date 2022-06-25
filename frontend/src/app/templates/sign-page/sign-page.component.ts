@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
+import { User } from './../../shared/User.model';
 
 @Component({
   selector: 'app-sign-page',
@@ -7,11 +10,33 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SignPageComponent implements OnInit {
 
-  hide: boolean = true;
+  hidePass: boolean = true;
+  hidePassConfirm: boolean = true;
 
-  constructor() {}
+  signForm!: FormGroup;
+
+  constructor(
+    private formBuilder: FormBuilder
+  ) {}
 
   ngOnInit(): void {
+    this.createFormInstance();
+  }
+
+  createFormInstance(): void {
+    this.signForm = this.formBuilder.group({
+      name: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', Validators.required],
+      passwordConfirm: ['', Validators.required],
+      birthDate: ['', Validators.required]
+    })
+  }
+
+  submitForm(): void {
+    const newUser: User = this.signForm.value;
+    newUser.birthDate = this.signForm.get('birthDate')?.value.toISOString();
+    console.log(newUser)
   }
 
 }
