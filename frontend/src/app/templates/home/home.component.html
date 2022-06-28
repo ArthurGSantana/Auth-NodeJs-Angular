@@ -3,6 +3,12 @@
     <img *ngIf='conditionShip' class="target bounce" src="../../assets/fog-preto.png" alt="foguete" (click)="click()" focus>
 
   <mat-card class="card fadeInUpBig" *ngIf='conditionCard'>
+
+    <div class="title">
+      <span>Bem-vindo</span>
+      <i class="fa-solid fa-rocket"></i>
+    </div>
+
     <form >
       <div class="divForm">
         <i class="fa-solid fa-user iform"></i>
@@ -32,7 +38,10 @@
         </div>
     </form>
     <div class="btn">
-      <button mat-raised-button (click)="login()">Entrar</button>
+      <button mat-raised-button (click)="login()">
+        Entrar
+        <i class="fa-solid fa-right-to-bracket" style="margin-right: 5px;"></i>
+      </button>
       <button mat-raised-button (click)="sign()">Cadastre-se</button>
     </div>
   </mat-card>
