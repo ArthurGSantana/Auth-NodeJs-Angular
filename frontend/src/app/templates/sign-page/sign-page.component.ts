@@ -36,7 +36,7 @@ export class SignPageComponent implements OnInit {
   submitForm(): void {
     const newUser: User = this.signForm.value;
     newUser.birthDate = this.signForm.get('birthDate')?.value.toISOString();
-    
+    console.log(newUser)
     
   }
 
