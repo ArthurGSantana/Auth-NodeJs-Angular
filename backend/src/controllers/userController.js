@@ -1,6 +1,18 @@
 import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
 
 import users from "../models/User.js";
+
+function createTokenJWT(user) {
+  const payload = {
+    id: user._id,
+    name: user.name ?? 'Teste'
+  }
+
+  const token = jwt.sign(payload, proccess.env.JWT_KEY);
+
+  return token;
+}
 
 class UserController {
 
@@ -83,6 +95,10 @@ class UserController {
   }
 
   static async login(req, res) {
+    const token = createTokenJWT(req.user);
+    
+    res.set('Authorization', token);
+
     return res.status(204).send({message: 'Login realizado com sucesso!'});
   }
 }
