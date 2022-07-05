@@ -1,6 +1,9 @@
 import passport from 'passport';
 import LocalStrategy from 'passport-local';
+import BearerStrategy from 'passport-http-bearer';
+
 import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
 
 import UserController from './../controllers/userController.js';
 
@@ -18,7 +21,7 @@ async function checkPassword(password, passwordHash) {
   }
 }
  
-const passportUse = passport.use(
+export const passportUseLocal = passport.use(
   new LocalStrategy({
     usernameField: 'email',
     session: false
@@ -38,5 +41,18 @@ const passportUse = passport.use(
   })
 )
 
-export default passportUse;
+export const passportUseBearer = passport.use(
+  new BearerStrategy(
+    async (token, done) => {
+      try {
+        const payload = jwt.verify(token, process.env.JWT_KEY);
+        const user = await UserController.getUserStrategy(payload.id);
+        done(null, user);
+
+      } catch(error) {
+        done(error);
+      }
+    }
+  )
+)
 

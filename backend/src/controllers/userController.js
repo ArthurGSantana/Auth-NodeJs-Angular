@@ -9,7 +9,7 @@ function createTokenJWT(user) {
     name: user.name ?? 'Teste'
   }
 
-  const token = jwt.sign(payload, proccess.env.JWT_KEY);
+  const token = jwt.sign(payload, process.env.JWT_KEY);
 
   return token;
 }
@@ -29,7 +29,17 @@ class UserController {
 
     } catch(error) {
       return res.status(500)
-        .json({message: `${error.message} - Erro ao buscar Id do Usuário!`})
+        .json({message: `${error.message} - Erro ao buscar Id do Usuário!`});
+    }
+  }
+
+  static async getUserStrategy(idUser) {
+    try {
+      const user = await users.findById(idUser);
+      return user;
+
+    } catch(error) {
+      return {message: `${error.message} - Erro ao buscar Id do Usuário!`};
     }
   }
 
@@ -52,7 +62,7 @@ class UserController {
       return user;
 
     } catch(error) {
-      return {message: `${error.message} - Erro ao buscar Email do Usuário!`}
+      return {message: `${error.message} - Erro ao buscar Email do Usuário!`};
     }
   }
 
