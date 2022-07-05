@@ -9,7 +9,7 @@ function createTokenJWT(user) {
     name: user.name ?? 'Teste'
   }
 
-  const token = jwt.sign(payload, process.env.JWT_KEY);
+  const token = jwt.sign(payload, process.env.JWT_KEY, {expiresIn: '15m'});
 
   return token;
 }
@@ -110,6 +110,10 @@ class UserController {
     res.set('Authorization', token);
 
     return res.status(204).send({message: 'Login realizado com sucesso!'});
+  }
+
+  static async logout(req, res) {
+    
   }
 }
 

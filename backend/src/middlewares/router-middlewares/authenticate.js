@@ -28,12 +28,16 @@ const authorization = {
         if(error && error.name === 'JsonWebTokenError')
           return res.status(401).json({erro: error.message});
 
+        if(error && error.name === 'TokenExpiredError')
+          return res.status(401).json({erro: error.message, expiradoEm: error.expiredAt});
+
         if(error)
           return res.status(500).json({erro: error.message});
 
         if(!user)
           return res.status(401).json();
 
+        req.token = info.token;
         req.user = user;
         return next();
       }

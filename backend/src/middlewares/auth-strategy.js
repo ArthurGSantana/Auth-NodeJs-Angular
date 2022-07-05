@@ -47,7 +47,7 @@ export const passportUseBearer = passport.use(
       try {
         const payload = jwt.verify(token, process.env.JWT_KEY);
         const user = await UserController.getUserStrategy(payload.id);
-        done(null, user);
+        done(null, user, {token});
 
       } catch(error) {
         done(error);
