@@ -8,6 +8,7 @@ const router = Router();
 router
   .get('/user/list', authorization.bearer, UserController.listUsers)
   .get('/user/search', UserController.getUserByEmail)
+  .get('/user/logout', authorization.bearer, UserController.logout)
   .get('/user/:idUser', UserController.getUser)
   .post('/user', UserController.createUser)
   .post('/user/login', authorization.local, UserController.login)

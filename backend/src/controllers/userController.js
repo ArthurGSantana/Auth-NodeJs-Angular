@@ -2,6 +2,7 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
 import users from "../models/User.js";
+import blacklist from './../../redis/blacklistController.js';
 
 function createTokenJWT(user) {
   const payload = {
@@ -113,7 +114,14 @@ class UserController {
   }
 
   static async logout(req, res) {
-    
+    try {
+      const token = req.token;
+      await blacklist.addToken(token);
+      return res.status(204).send();
+
+    } catch(error) {
+      return res.status(500).json({error: error.message})
+    }
   }
 }
 

@@ -24,3 +24,5 @@ const redisClient = {
     return result === 1;
   }
 }
+
+export default redisClient;
