@@ -1,8 +1,10 @@
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
+import crypto from  'crypto';
+import moment from 'moment';
 
 import users from "../models/User.js";
-import blacklist from './../../redis/blacklistController.js';
+import blocklist from './../../redis/blocklistController.js';
 
 function createTokenJWT(user) {
   const payload = {
@@ -13,6 +15,12 @@ function createTokenJWT(user) {
   const token = jwt.sign(payload, process.env.JWT_KEY, {expiresIn: '15m'});
 
   return token;
+}
+
+function createTokenOpaque(user) {
+  const tokenOpaque = crypto.randomBytes(24).toString('hex');
+  const dateExp = moment().add(5, 'd').unix();
+  return tokenOpaque;
 }
 
 class UserController {
@@ -106,21 +114,27 @@ class UserController {
   }
 
   static async login(req, res) {
-    const token = createTokenJWT(req.user);
-    
-    res.set('Authorization', token);
+    try {
+      const accessToken = createTokenJWT(req.user);
+      const refreshToken = createTokenOpaque(req.user);
+      
+      res.set('Authorization', accessToken);
+  
+      return res.status(200).json({refreshToken});
 
-    return res.status(204).send({message: 'Login realizado com sucesso!'});
+    } catch(error) {
+      return res.status(500).json({error: error.message});
+    }
   }
 
   static async logout(req, res) {
     try {
       const token = req.token;
-      await blacklist.addToken(token);
+      await blocklist.addToken(token);
       return res.status(204).send();
 
     } catch(error) {
-      return res.status(500).json({error: error.message})
+      return res.status(500).json({error: error.message});
     }
   }
 }

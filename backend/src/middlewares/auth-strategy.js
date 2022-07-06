@@ -6,7 +6,7 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
 import UserController from './../controllers/userController.js';
-import blacklist from './../../redis/blacklistController.js';
+import blocklist from './../../redis/blocklistController.js';
 
 function checkUser(user) {
   if(!user) {
@@ -23,7 +23,7 @@ async function checkPassword(password, passwordHash) {
 }
 
 async function checkTokenList(token) {
-  const tokenVerify = await blacklist.checkToken(token);
+  const tokenVerify = await blocklist.checkToken(token);
 
   if(tokenVerify) {
     throw new jwt.JsonWebTokenError('Token inválido por logout!')

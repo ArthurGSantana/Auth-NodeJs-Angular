@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken';
 import { createHash } from 'crypto';
 
-import blacklist from './blacklist.js';
+import blocklist from './blocklist.js';
 
 function createTokenHash(token) {
   return createHash('sha256')
@@ -14,12 +14,12 @@ const redisClient = {
     const dateExp = jwt.decode(token).exp;
     const tokenHash = createTokenHash(token);
 
-    await blacklist.set(tokenHash, '');
-    blacklist.expireAt(tokenHash, dateExp);
+    await blocklist.set(tokenHash, '');
+    blocklist.expireAt(tokenHash, dateExp);
   },
   checkToken: async token => {
     const tokenHash = createTokenHash(token);
-    const result = await blacklist.exists(tokenHash);
+    const result = await blocklist.exists(tokenHash);
     
     return result === 1;
   }
