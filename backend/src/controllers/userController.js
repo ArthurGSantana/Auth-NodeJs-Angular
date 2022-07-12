@@ -4,7 +4,9 @@ import crypto from  'crypto';
 import moment from 'moment';
 
 import users from "../models/User.js";
-import blocklist from './../../redis/blocklistController.js';
+
+import blocklist from './../../redis/blocklist-access-token.js';
+import allowlist from './../../redis/allowlist-refresh-token.js';
 
 function createTokenJWT(user) {
   const payload = {
@@ -17,10 +19,17 @@ function createTokenJWT(user) {
   return token;
 }
 
-function createTokenOpaque(user) {
-  const tokenOpaque = crypto.randomBytes(24).toString('hex');
-  const dateExp = moment().add(5, 'd').unix();
-  return tokenOpaque;
+async function createTokenOpaque(user) {
+  try {
+    const tokenOpaque = crypto.randomBytes(24).toString('hex');
+    const dateExp = moment().add(5, 'd').unix();
+    await allowlist.add(tokenOpaque, user._id.toString(), dateExp);
+    return tokenOpaque;
+
+  } catch(error) {
+    console.log(error)
+    throw new Error(error)
+  }
 }
 
 class UserController {
@@ -116,7 +125,7 @@ class UserController {
   static async login(req, res) {
     try {
       const accessToken = createTokenJWT(req.user);
-      const refreshToken = createTokenOpaque(req.user);
+      const refreshToken = await createTokenOpaque(req.user);
       
       res.set('Authorization', accessToken);
   

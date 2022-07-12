@@ -1,4 +1,4 @@
-const list = list => {
+const redisList = list => {
   return {
     async add(key, value, dateExp) {
       await list.set(key, value);
@@ -20,3 +20,5 @@ const list = list => {
     }
   }
 }
+
+export default redisList;

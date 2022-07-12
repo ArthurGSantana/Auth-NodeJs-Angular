@@ -6,7 +6,7 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
 import UserController from './../controllers/userController.js';
-import blocklist from './../../redis/blocklistController.js';
+import blocklist from './../../redis/blocklist-access-token.js';
 
 function checkUser(user) {
   if(!user) {
