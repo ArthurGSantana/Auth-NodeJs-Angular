@@ -1,5 +1,26 @@
 import passport from 'passport';
 
+import UserController from '../../controllers/userController.js';
+import allowlistRefreshToken from './../../../redis/allowlist-refresh-token.js'
+
+async function checkRefreshToken(refreshToken) {
+  if(!refreshToken) {
+    throw new Error('Refresh não enviado!');
+  }
+
+  const id = await allowlistRefreshToken.getValue(refreshToken);
+
+  if(!id) {
+    throw new Error('Refresh token inválido!')
+  }
+
+  return id;
+}
+
+async function invalidRefreshToken(refreshToken) {
+  await allowlistRefreshToken.delete(refreshToken);
+}
+
 const authorization = {
   local: (req, res, next) => {
     passport.authenticate(
@@ -20,6 +41,7 @@ const authorization = {
       }
     )(req, res, next)
   },
+
   bearer: (req, res, next) => {
     passport.authenticate(
       'bearer',
@@ -42,6 +64,23 @@ const authorization = {
         return next();
       }
     )(req, res, next)
+  },
+
+  refresh: async (req, res, next) => {
+    try {
+      const {refreshToken} = req.body;
+  
+      const id = await checkRefreshToken(refreshToken);
+      await invalidRefreshToken(refreshToken);
+      req.user = await UserController.getUserStrategy(id);
+      return next();
+
+    } catch(error) {
+      if(error.name === 'InvalidArgumentError') 
+        return res.status(401).json({error: error.message});
+
+      return res.status(500).json({error: error.message});
+    }
   }
 }
 
