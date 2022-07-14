@@ -1,25 +1,7 @@
 import passport from 'passport';
 
 import UserController from '../../controllers/userController.js';
-import allowlistRefreshToken from './../../../redis/allowlist-refresh-token.js'
-
-async function checkRefreshToken(refreshToken) {
-  if(!refreshToken) {
-    throw new Error('Refresh não enviado!');
-  }
-
-  const id = await allowlistRefreshToken.getValue(refreshToken);
-
-  if(!id) {
-    throw new Error('Refresh token inválido!')
-  }
-
-  return id;
-}
-
-async function invalidRefreshToken(refreshToken) {
-  await allowlistRefreshToken.delete(refreshToken);
-}
+import tokens from './../../auth/tokens.js';
 
 const authorization = {
   local: (req, res, next) => {
@@ -70,8 +52,8 @@ const authorization = {
     try {
       const {refreshToken} = req.body;
   
-      const id = await checkRefreshToken(refreshToken);
-      await invalidRefreshToken(refreshToken);
+      const id = await tokens.refresh.check(refreshToken);
+      await tokens.refresh.invalid(refreshToken);
       req.user = await UserController.getUserStrategy(id);
       return next();
 

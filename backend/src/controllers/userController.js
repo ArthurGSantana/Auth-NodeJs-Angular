@@ -1,36 +1,7 @@
 import bcrypt from 'bcrypt';
-import jwt from 'jsonwebtoken';
-import crypto from  'crypto';
-import moment from 'moment';
 
 import users from "../models/User.js";
-
-import blocklist from './../../redis/blocklist-access-token.js';
-import allowlist from './../../redis/allowlist-refresh-token.js';
-
-function createTokenJWT(user) {
-  const payload = {
-    id: user._id,
-    name: user.name ?? 'Teste'
-  }
-
-  const token = jwt.sign(payload, process.env.JWT_KEY, {expiresIn: '15m'});
-
-  return token;
-}
-
-async function createTokenOpaque(user) {
-  try {
-    const tokenOpaque = crypto.randomBytes(24).toString('hex');
-    const dateExp = moment().add(5, 'd').unix();
-    await allowlist.add(tokenOpaque, user._id.toString(), dateExp);
-    return tokenOpaque;
-
-  } catch(error) {
-    console.log(error)
-    throw new Error(error)
-  }
-}
+import tokens from './../auth/tokens.js';
 
 class UserController {
 
@@ -124,8 +95,9 @@ class UserController {
 
   static async login(req, res) {
     try {
-      const accessToken = createTokenJWT(req.user);
-      const refreshToken = await createTokenOpaque(req.user);
+      console.log(req.user)
+      const accessToken = tokens.access.create(req.user);
+      const refreshToken = await tokens.refresh.create(req.user._id);
       
       res.set('Authorization', accessToken);
   
@@ -139,7 +111,7 @@ class UserController {
   static async logout(req, res) {
     try {
       const token = req.token;
-      await blocklist.addToken(token);
+      await tokens.access.invalid(token);
       return res.status(204).send();
 
     } catch(error) {

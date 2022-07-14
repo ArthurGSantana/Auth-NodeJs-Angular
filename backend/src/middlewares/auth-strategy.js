@@ -1,12 +1,10 @@
 import passport from 'passport';
 import LocalStrategy from 'passport-local';
 import BearerStrategy from 'passport-http-bearer';
-
 import bcrypt from 'bcrypt';
-import jwt from 'jsonwebtoken';
 
+import tokens from './../auth/tokens.js';
 import UserController from './../controllers/userController.js';
-import blocklist from './../../redis/blocklist-access-token.js';
 
 function checkUser(user) {
   if(!user) {
@@ -19,14 +17,6 @@ async function checkPassword(password, passwordHash) {
 
   if(!validPassword) {
     throw new Error('Senha inválida!')
-  }
-}
-
-async function checkTokenList(token) {
-  const tokenVerify = await blocklist.checkToken(token);
-
-  if(tokenVerify) {
-    throw new jwt.JsonWebTokenError('Token inválido por logout!')
   }
 }
  
@@ -54,9 +44,8 @@ export const passportUseBearer = passport.use(
   new BearerStrategy(
     async (token, done) => {
       try {
-        await checkTokenList(token);
-        const payload = jwt.verify(token, process.env.JWT_KEY);
-        const user = await UserController.getUserStrategy(payload.id);
+        const id = await tokens.access.check(token)
+        const user = await UserController.getUserStrategy(id);
         done(null, user, {token});
 
       } catch(error) {
