@@ -8,6 +8,7 @@ const router = Router();
 router
   .get('/user/list', authorization.bearer, UserController.listUsers)
   .get('/user/search', UserController.getUserByEmail)
+  .get('/user/check_email/:idUser', UserController.verifiedEmail)
   .get('/user/:idUser', UserController.getUser)
   .post('/user/login', authorization.local, UserController.login)
   .post('/user/updateToken', authorization.refresh, UserController.login)

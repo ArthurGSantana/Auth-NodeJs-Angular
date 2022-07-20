@@ -2,6 +2,12 @@ import bcrypt from 'bcrypt';
 
 import users from "../models/User.js";
 import tokens from './../auth/tokens.js';
+import CheckEmail from './../middlewares/email.js';
+
+function createAddress(route, id) {
+  const baseURL = process.env.BASE_URL;
+  return `${baseURL}${route}${id}`;
+}
 
 class UserController {
 
@@ -68,10 +74,17 @@ class UserController {
 
   static async createUser(req, res) {
     const user = new users(req.body);
+
     user.password = await bcrypt.hash(user.password, 12);
+    user.verifiedEmail = false;
 
     try {
       await user.save();
+
+      const address = createAddress('/user/check_email/', user._id);
+      const checkEmail = new CheckEmail(user, address);
+      checkEmail.sendEmail().catch(console.log)
+
       return res.status(201).json(user);
 
     } catch(error) {
@@ -113,6 +126,19 @@ class UserController {
       const token = req.token;
       await tokens.access.invalid(token);
       return res.status(204).send();
+
+    } catch(error) {
+      return res.status(500).json({error: error.message});
+    }
+  }
+
+  static async verifiedEmail(req, res) {
+    const {idUser} = req.params;
+    const user = {verifiedEmail: true};
+
+    try {
+      await users.findByIdAndUpdate(idUser, {$set: user});
+      return res.status(200).send();
 
     } catch(error) {
       return res.status(500).json({error: error.message});
